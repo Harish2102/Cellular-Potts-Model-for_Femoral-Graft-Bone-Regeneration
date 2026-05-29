@@ -132,10 +132,9 @@ git clone https://github.com/Harish2102/CPM-Model-for-Femoral-Data-Study-Xenco-M
 
 
 ## Disclaimer
-Copyright (c) 2026 Xenco Medical
 
 All rights reserved.
-This code is proprietary and confidential. Unauthorized copying, modification, distribution, or use of this software, via any medium, is strictly prohibited.
-This repository is shared for demonstration and portfolio purposes only.
+This code is proprietary and confidential.
+This repository is shared for demonstration and portfolio purposes.
 
 
