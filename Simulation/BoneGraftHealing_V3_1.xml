@@ -1,0 +1,225 @@
+<CompuCell3D Revision="2" Version="4.6.0">
+  
+
+   <Metadata>
+      
+      <NumberOfProcessors>22</NumberOfProcessors>
+      <DebugOutputFrequency>10</DebugOutputFrequency>
+   </Metadata>
+   
+   <Potts>
+      
+      <Dimensions x="60" y="60" z="100"/> <!-- 0.1 mm per voxel -->
+      <!-- 84010 cause I want the entire 84000 steps to be displayed and not stop at 83,990 -->
+      <Steps>84010</Steps> 
+      <Temperature>6.0</Temperature>
+      <NeighborOrder>2</NeighborOrder>
+   </Potts>
+   
+   <Plugin Name="CellType">
+      <CellType                 TypeId="0" TypeName="Medium"/>
+      <CellType Freeze = ""     TypeId="1" TypeName="HostBone"/>
+      <CellType                 TypeId="2" TypeName="Osteoblast"/>
+      <CellType                 TypeId="3" TypeName="Osteoclast"/>
+      <CellType                 TypeId="4" TypeName="Macrophage"/>
+      <CellType                 TypeId="5" TypeName="MSC"/>
+      <CellType Freeze = ""     TypeId="6" TypeName="Graft"/>
+      <CellType Freeze = ""     TypeId="7" TypeName="FibrousTissue"/>
+      <CellType Freeze = ""     TypeId="8" TypeName="NewBone"/>
+   </Plugin>
+   
+   <Plugin Name="Volume">
+        <VolumeEnergyParameters CellType="HostBone"      LambdaVolume="20.0"     TargetVolume="2"/>
+        <VolumeEnergyParameters CellType="Osteoblast"    LambdaVolume="2.50"     TargetVolume="4"/>
+        <VolumeEnergyParameters CellType="Osteoclast"    LambdaVolume="2.50"     TargetVolume="4"/>
+        <VolumeEnergyParameters CellType="Macrophage"    LambdaVolume="3.00"     TargetVolume="4"/>
+        <VolumeEnergyParameters CellType="MSC"           LambdaVolume="2.50"     TargetVolume="6"/>
+        <VolumeEnergyParameters CellType="Graft"         LambdaVolume="15.0"     TargetVolume="10"/>
+        <VolumeEnergyParameters CellType="FibrousTissue" LambdaVolume="150.00"     TargetVolume="3"/>
+        <VolumeEnergyParameters CellType="NewBone"       LambdaVolume="20.0"     TargetVolume="2"/>
+    </Plugin>
+
+    <Plugin Name="Surface">
+       <SurfaceEnergyParameters CellType="HostBone"      LambdaSurface="20.0" TargetSurface="6"/>
+       <SurfaceEnergyParameters CellType="Osteoblast"    LambdaSurface="1.0"  TargetSurface="12"/>
+       <SurfaceEnergyParameters CellType="Osteoclast"    LambdaSurface="2.0"  TargetSurface="8"/>
+       <SurfaceEnergyParameters CellType="Macrophage"    LambdaSurface="6.0"  TargetSurface="20"/>
+       <SurfaceEnergyParameters CellType="MSC"           LambdaSurface="4.0"  TargetSurface="10"/>
+       <SurfaceEnergyParameters CellType="Graft"         LambdaSurface="20.0" TargetSurface="6"/>
+       <SurfaceEnergyParameters CellType="FibrousTissue" LambdaSurface="100"  TargetSurface="12"/>
+       <SurfaceEnergyParameters CellType="NewBone"       LambdaSurface="20.0" TargetSurface="6"/>
+    </Plugin>
+
+    <Plugin Name="NeighborTracker">
+    </Plugin>
+        
+    <Plugin Name="Secretion">
+    </Plugin>
+
+    <Plugin Name="PixelTracker">
+    </Plugin>
+    
+<Plugin Name="BoundaryPixelTracker">
+   <!-- Module tracking boundary pixels of each cell -->
+   <NeighborOrder>2</NeighborOrder>
+</Plugin>
+
+
+   <Plugin Name="Contact">
+      <!-- Specification of adhesion energies -->
+      <Energy Type1="Medium"            Type2="Medium">10.0</Energy>
+      <Energy Type1="Medium"            Type2="HostBone">10.0</Energy>
+      <Energy Type1="Medium"            Type2="Osteoblast">10.0</Energy>
+      <Energy Type1="Medium"            Type2="Osteoclast">12.0</Energy>
+      <Energy Type1="Medium"            Type2="Macrophage">10.0</Energy>
+      <Energy Type1="Medium"            Type2="MSC">6.0</Energy>
+      <Energy Type1="Medium"            Type2="Graft">20.0</Energy>
+      <Energy Type1="Medium"            Type2="FibrousTissue">12.0</Energy>
+      
+      <Energy Type1="HostBone"          Type2="HostBone">8.0</Energy>
+      <Energy Type1="HostBone"          Type2="Osteoblast">5.0</Energy>
+      <Energy Type1="HostBone"          Type2="Osteoclast">8.0</Energy>
+      <Energy Type1="HostBone"          Type2="Macrophage">10.0</Energy>
+      <Energy Type1="HostBone"          Type2="MSC">6.0</Energy>
+      <Energy Type1="HostBone"          Type2="Graft">12.0</Energy>
+      <Energy Type1="HostBone"          Type2="FibrousTissue">14.0</Energy>
+      
+      <Energy Type1="Osteoblast"        Type2="Osteoblast">6.0</Energy>
+      <Energy Type1="Osteoblast"        Type2="Osteoclast">9.0</Energy>
+      <Energy Type1="Osteoblast"        Type2="Macrophage">10.0</Energy>
+      <Energy Type1="Osteoblast"        Type2="MSC">9.0</Energy>
+      <Energy Type1="Osteoblast"        Type2="Graft">4.0</Energy>
+      <Energy Type1="Osteoblast"        Type2="FibrousTissue">14.0</Energy>
+
+      <Energy Type1="Osteoclast"        Type2="Osteoclast">6.0</Energy>
+      <Energy Type1="Osteoclast"        Type2="Macrophage">10.0</Energy>
+      <Energy Type1="Osteoclast"        Type2="MSC">10.0</Energy>
+      <Energy Type1="Osteoclast"        Type2="Graft">4.0</Energy>
+      <Energy Type1="Osteoclast"        Type2="FibrousTissue">14.0</Energy>
+      
+      <Energy Type1="Macrophage"        Type2="Macrophage">12.0</Energy>
+      <Energy Type1="Macrophage"        Type2="MSC">12.0</Energy>
+      <Energy Type1="Macrophage"        Type2="Graft">8.0</Energy>
+      <Energy Type1="Macrophage"        Type2="FibrousTissue">7.0</Energy>
+      
+      <Energy Type1="MSC"               Type2="MSC">8.0</Energy>
+      <Energy Type1="MSC"               Type2="Graft">6.0</Energy>
+      <Energy Type1="MSC"               Type2="FibrousTissue">14.0</Energy>
+        
+      <Energy Type1="Graft"             Type2="Graft">8.0</Energy>
+      <Energy Type1="Graft"             Type2="FibrousTissue">10.0</Energy>
+      
+      <Energy Type1="FibrousTissue"     Type2="FibrousTissue">8.0</Energy>
+      <Energy Type1="NewBone"           Type2="Osteoblast">5.0</Energy>
+      <Energy Type1="NewBone"           Type2="Osteoblast">6.0</Energy>
+
+      
+     
+   </Plugin>
+
+<Plugin Name="Chemotaxis">
+   <ChemicalField Name="IC">
+      <ChemotaxisByType Lambda="40.0"  Type="MSC"/>
+      <ChemotaxisByType Lambda="60.0" Type="Macrophage"/>
+      <ChemotaxisByType Lambda="50.0"  Type="Osteoclast" />
+   </ChemicalField>
+   
+    <!-- <ChemicalField Name="ALP"> -->
+      <!-- <ChemotaxisByType Lambda="120.0"  Type="Osteoblast"/> -->
+      <!-- <ChemotaxisByType Lambda="70.0"   Type="MSC"/> -->
+   <!-- </ChemicalField> -->
+</Plugin>
+
+    
+   <Steppable Type="DiffusionSolverFE_OpenCL">
+      
+      <!-- Specification of PDE solvers -->
+      <DiffusionField Name="Oxygen">
+         <DiffusionData>
+            <FieldName>Oxygen</FieldName>
+            <GlobalDiffusionConstant>0.5</GlobalDiffusionConstant>
+            <GlobalDecayConstant>1e-3</GlobalDecayConstant>
+            <!-- Additional options are: -->
+            <InitialConcentrationExpression>0.2</InitialConcentrationExpression>
+            <!-- <ConcentrationFileName>INITIAL CONCENTRATION FIELD - typically a file with path Simulation/NAME_OF_THE_FILE.txt</ConcentrationFileName> -->
+            <DiffusionCoefficient CellType="HostBone">          0.8</DiffusionCoefficient>
+            <DiffusionCoefficient CellType="Osteoblast">        0.8</DiffusionCoefficient>
+            <DiffusionCoefficient CellType="Osteoclast">        0.8</DiffusionCoefficient>
+            <DiffusionCoefficient CellType="Macrophage">        0.8</DiffusionCoefficient>
+            <DiffusionCoefficient CellType="MSC">               0.8</DiffusionCoefficient>
+            <DiffusionCoefficient CellType="Graft">             0.2</DiffusionCoefficient>
+            <DiffusionCoefficient CellType="FibrousTissue">     0.45</DiffusionCoefficient>
+            <DiffusionCoefficient CellType="NewBone">           0.6</DiffusionCoefficient>
+            
+         </DiffusionData>
+         <SecretionData>
+            <SecretionOnContact SecreteOnContactWith="Graft" Type="HostBone">0.04</SecretionOnContact>
+            <ConstantConcentration Type="Medium">0.1</ConstantConcentration>
+            <ConstantConcentration Type="NewBone">0.04</ConstantConcentration>
+            <ConstantConcentration Type="HostBone">0.02</ConstantConcentration>
+         </SecretionData>
+         
+         
+         <BoundaryConditions>
+            <Plane Axis="X">
+               <ConstantDerivative PlanePosition="Min" Value="0.0"/>
+               <ConstantDerivative PlanePosition="Max" Value="0.0"/>
+
+            </Plane>
+            <Plane Axis="Y">
+               <ConstantDerivative PlanePosition="Min" Value="0.0"/>
+               <ConstantDerivative PlanePosition="Max" Value="0.0"/>
+            </Plane>
+            <Plane Axis="Z">
+               <ConstantDerivative PlanePosition="Min" Value="0.0"/>
+               <ConstantDerivative PlanePosition="Max" Value="0.0"/>
+            </Plane>
+         </BoundaryConditions>
+      </DiffusionField>
+      
+      
+      <DiffusionField Name="IC">
+         <DiffusionData>
+            <FieldName>IC</FieldName>
+            <GlobalDiffusionConstant>0.06</GlobalDiffusionConstant>
+            <GlobalDecayConstant>0.02</GlobalDecayConstant>
+         </DiffusionData>
+         
+         <BoundaryConditions>
+            <Plane Axis="X">
+               <ConstantDerivative PlanePosition="Min" Value="0.0"/>
+               <ConstantDerivative PlanePosition="Max" Value="0.0"/>
+            </Plane>
+            <Plane Axis="Y">
+               <ConstantDerivative PlanePosition="Min" Value="0.0"/>
+               <ConstantDerivative PlanePosition="Max" Value="0.0"/>
+            </Plane>
+            <Plane Axis="Z">
+               <ConstantDerivative PlanePosition="Min" Value="0.0"/>
+               <ConstantDerivative PlanePosition="Max" Value="0.0"/>
+            </Plane>
+         </BoundaryConditions>
+      </DiffusionField>
+      
+      
+    <!-- 3. NEW ALP field with slight decay -->
+    <DiffusionField Name="ALP">
+      <DiffusionData>
+        <FieldName>ALP</FieldName>
+        <GlobalDiffusionConstant>0.12</GlobalDiffusionConstant>
+        <GlobalDecayConstant>1e-3</GlobalDecayConstant>
+      </DiffusionData>
+      
+      <BoundaryConditions>
+        <Plane Axis="X"><ConstantDerivative PlanePosition="Min" Value="0.0"/>
+          <ConstantDerivative PlanePosition="Max" Value="0.0"/></Plane>
+        <Plane Axis="Y"><ConstantDerivative PlanePosition="Min" Value="0.0"/>
+          <ConstantDerivative PlanePosition="Max" Value="0.0"/></Plane>
+        <Plane Axis="Z"><ConstantDerivative PlanePosition="Min" Value="0.0"/>
+          <ConstantDerivative PlanePosition="Max" Value="0.0"/></Plane>
+      </BoundaryConditions>
+      
+    </DiffusionField>
+   </Steppable>
+
+</CompuCell3D>
